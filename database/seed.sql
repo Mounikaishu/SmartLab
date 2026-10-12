@@ -1,0 +1,3 @@
+-- Sample records should use clearly synthetic identities.
+-- Populate via a reviewed seed script once UUIDs and identity mapping conventions are agreed.
+-- Do not put real student data or passwords in source control.
