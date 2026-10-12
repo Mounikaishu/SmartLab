@@ -1,0 +1,23 @@
+# Development-only PostgreSQL service.
+# Before use, set POSTGRES_PASSWORD in your shell environment or local untracked .env file.
+services:
+  postgres:
+    image: postgres:16
+    container_name: smartlab-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: smartlab
+      POSTGRES_USER: smartlab
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in your environment}
+    ports:
+      - "5432:5432"
+    volumes:
+      - smartlab_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U smartlab -d smartlab"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  smartlab_pgdata:
